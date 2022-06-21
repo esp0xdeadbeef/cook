@@ -81,7 +81,7 @@ func flagsHelp() {
 	printHelp(
 		"USAGE",
 		"cook [params and values] [pattern]",
-		"cook -param1 value -file: filename -param3 value param3,admin_set param1 file,[1-300]",
+		"cook -param1 '_first fuzzword_' -file: C:\path\to\file -param3 '_second fuzzword_' param1 param3,admin_set file,1-300",
 	)
 
 	printHelp(
@@ -205,11 +205,6 @@ func usageHelp() {
 		"$ cook / admin,root _,- secret,critical",
 	)
 	printHelp(
-		"FUNCTIONS",
-		"Use functions such as date for different variations of values",
-		"$ cook -dob date(17,Sep,1994) elliot _,- dob",
-	)
-	printHelp(
 		"RANGES",
 		"Use ranges like 1-100, A-Z, a-z or A-z in pattern of command",
 		"$ cook 1-999",
@@ -218,9 +213,9 @@ func usageHelp() {
 		"$ cook X-d",
 	)
 	printHelp(
-		"RAW STRINGS",
-		"Print value without any parsing/modification.",
-		"$ cook -date `date(17,Sep,1994)` date",
+		"USING -min",
+		"Print value without any parsing/modification",
+		"$ cook n n n -min 1",
 	)
 	printHelp(
 		"PIPE INPUT",
@@ -228,8 +223,21 @@ func usageHelp() {
 		"$ cook -d - d / test",
 	)
 	printHelp(
-		"USING -min",
-		"Print value without any parsing/modification",
-		"$ cook n n n -min 1",
+		"FUNCTIONS",
+		"Use functions such as date for different variations of values",
+		"$ cook -dob date[17,Sep,1994] elliot _,- dob",
+	)
+	printHelp(
+		"METHODS",
+		"Methods to edit your data after generating (base64, and md5)",
+		"$ cook value1,value2 -m b64e.md5",
+		"Methods to edit data on position e.g. 0 (2x b64e, and append testing)",
+		"$ cook value1,value2 testing -mc 0:b64e,b64e",
+	)
+	printHelp(
+		"RAW STRINGS",
+		"Print value without any parsing/modification. (use \` in linux)",
+		"$ cook -dob `date[17,Sep,1994]` elliot _,- dob",
+		"$ cook `help` modes",
 	)
 }
